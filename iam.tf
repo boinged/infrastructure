@@ -33,6 +33,8 @@ resource "google_service_account_key" "kubeip_key" {
 }
 
 resource "kubernetes_secret" "kubeip_secret" {
+  depends_on = [google_container_cluster.cluster]
+
   metadata {
     name      = "kubeip-key"
     namespace = "kube-system"

@@ -2,8 +2,8 @@ provider "google" {
   version = "3.16.0"
 }
 
-resource "google_container_cluster" "london_cluster" {
-  name     = "london-tf"
+resource "google_container_cluster" "cluster" {
+  name     = var.cluster
   location = var.location
 
   initial_node_count       = 1
@@ -22,8 +22,8 @@ resource "google_container_cluster" "london_cluster" {
 
 resource "google_container_node_pool" "main_pool" {
   name     = "main"
-  cluster  = google_container_cluster.london_cluster.name
-  location = google_container_cluster.london_cluster.location
+  cluster  = google_container_cluster.cluster.name
+  location = google_container_cluster.cluster.location
 
   node_count = 1
 
@@ -41,8 +41,8 @@ resource "google_container_node_pool" "main_pool" {
 
 resource "google_container_node_pool" "ingress_pool" {
   name     = "ingress"
-  cluster  = google_container_cluster.london_cluster.name
-  location = google_container_cluster.london_cluster.location
+  cluster  = google_container_cluster.cluster.name
+  location = google_container_cluster.cluster.location
 
   node_count = 1
 
@@ -60,9 +60,9 @@ resource "google_container_node_pool" "ingress_pool" {
 
 provider "kubernetes" {
   version = "1.11.1"
-  host = google_container_cluster.london_cluster.endpoint
+  host = google_container_cluster.cluster.endpoint
 
-  client_certificate = base64decode(google_container_cluster.london_cluster.master_auth.0.client_certificate)
-  client_key = base64decode(google_container_cluster.london_cluster.master_auth.0.client_key)
-  cluster_ca_certificate = base64decode(google_container_cluster.london_cluster.master_auth.0.cluster_ca_certificate)
+  client_certificate = base64decode(google_container_cluster.cluster.master_auth.0.client_certificate)
+  client_key = base64decode(google_container_cluster.cluster.master_auth.0.client_key)
+  cluster_ca_certificate = base64decode(google_container_cluster.cluster.master_auth.0.cluster_ca_certificate)
 }
