@@ -2,6 +2,10 @@ provider "google" {
   version = "3.16.0"
 }
 
+provider "google-beta" {
+  version = "3.16.0"
+}
+
 resource "google_container_cluster" "cluster" {
   name     = var.cluster
   location = var.location
