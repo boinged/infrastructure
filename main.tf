@@ -28,7 +28,7 @@ resource "google_container_node_pool" "main_pool" {
   node_count = 1
 
   management {
-    auto_repair = true
+    auto_repair  = true
     auto_upgrade = false
   }
 
@@ -47,7 +47,7 @@ resource "google_container_node_pool" "ingress_pool" {
   node_count = 1
 
   management {
-    auto_repair = true
+    auto_repair  = true
     auto_upgrade = false
   }
 
@@ -60,9 +60,9 @@ resource "google_container_node_pool" "ingress_pool" {
 
 provider "kubernetes" {
   version = "1.11.1"
-  host = google_container_cluster.cluster.endpoint
+  host    = google_container_cluster.cluster.endpoint
 
-  client_certificate = base64decode(google_container_cluster.cluster.master_auth.0.client_certificate)
-  client_key = base64decode(google_container_cluster.cluster.master_auth.0.client_key)
+  client_certificate     = base64decode(google_container_cluster.cluster.master_auth.0.client_certificate)
+  client_key             = base64decode(google_container_cluster.cluster.master_auth.0.client_key)
   cluster_ca_certificate = base64decode(google_container_cluster.cluster.master_auth.0.cluster_ca_certificate)
 }
