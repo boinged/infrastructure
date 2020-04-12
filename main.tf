@@ -40,6 +40,10 @@ resource "google_container_node_pool" "main_pool" {
     disk_size_gb = "10"
     machine_type = "f1-micro"
     preemptible  = true
+
+    oauth_scopes = [
+      "https://www.googleapis.com/auth/devstorage.read_only"
+    ]
   }
 }
 
@@ -59,6 +63,10 @@ resource "google_container_node_pool" "ingress_pool" {
     disk_size_gb = "10"
     machine_type = "f1-micro"
     preemptible  = true
+
+    oauth_scopes = [
+      "https://www.googleapis.com/auth/devstorage.read_only"
+    ]
   }
 }
 
