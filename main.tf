@@ -42,7 +42,8 @@ resource "google_container_node_pool" "main_pool" {
     preemptible  = true
 
     oauth_scopes = [
-      "https://www.googleapis.com/auth/devstorage.read_only"
+      "https://www.googleapis.com/auth/devstorage.read_only",
+      "https://www.googleapis.com/auth/monitoring.write"
     ]
   }
 }
@@ -65,7 +66,8 @@ resource "google_container_node_pool" "ingress_pool" {
     preemptible  = true
 
     oauth_scopes = [
-      "https://www.googleapis.com/auth/devstorage.read_only"
+      "https://www.googleapis.com/auth/devstorage.read_only",
+      "https://www.googleapis.com/auth/monitoring.write"
     ]
   }
 }

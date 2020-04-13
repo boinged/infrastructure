@@ -4,7 +4,7 @@ resource "google_cloudbuild_trigger" "ci_trigger" {
 
   github {
     owner = "boinged"
-    name  = "website"
+    name  = "web-app"
 
     push {
       branch = "master"
