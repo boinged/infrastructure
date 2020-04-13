@@ -43,4 +43,12 @@ resource "kubernetes_secret" "kubeip_secret" {
   data = {
     "key.json" = base64decode(google_service_account_key.kubeip_key.private_key)
   }
+
+  provisioner "local-exec" {
+    command = <<EOT
+      kubectl scale --replicas=0 deployment/kube-dns-autoscaler --namespace=kube-system
+      kubectl scale --replicas=1 deployment/kube-dns --namespace=kube-system
+      kubectl scale --replicas=0 deployment/metrics-server-v0.3.1 --namespace=kube-system
+    EOT
+  }
 }
