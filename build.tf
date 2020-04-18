@@ -1,10 +1,10 @@
-resource "google_cloudbuild_trigger" "ci_trigger" {
+resource "google_cloudbuild_trigger" "api_ci_trigger" {
   provider = google-beta
-  name     = "web-ci"
+  name     = "api-ci"
 
   github {
     owner = "boinged"
-    name  = "web-app"
+    name  = "api-app"
 
     push {
       branch = "master"
@@ -14,13 +14,13 @@ resource "google_cloudbuild_trigger" "ci_trigger" {
   filename = "cloudbuild.yaml"
 }
 
-resource "google_cloudbuild_trigger" "cd_trigger" {
+resource "google_cloudbuild_trigger" "api_cd_trigger" {
   provider = google-beta
-  name     = "web-cd"
+  name     = "api-cd"
 
   github {
     owner = "boinged"
-    name  = "web-env"
+    name  = "api-env"
 
     push {
       branch = "master"
@@ -30,6 +30,22 @@ resource "google_cloudbuild_trigger" "cd_trigger" {
   substitutions = {
     _CLUSTER  = var.cluster
     _LOCATION = var.location
+  }
+
+  filename = "cloudbuild.yaml"
+}
+
+resource "google_cloudbuild_trigger" "web_cd_trigger" {
+  provider = google-beta
+  name     = "web-cd"
+
+  github {
+    owner = "boinged"
+    name  = "web-app"
+
+    push {
+      branch = "master"
+    }
   }
 
   filename = "cloudbuild.yaml"
