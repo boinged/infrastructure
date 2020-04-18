@@ -48,5 +48,9 @@ resource "google_cloudbuild_trigger" "web_cd_trigger" {
     }
   }
 
+  substitutions = {
+    _SERVICE_URL = google_compute_address.ip_address.address
+  }
+
   filename = "cloudbuild.yaml"
 }
