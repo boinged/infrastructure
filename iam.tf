@@ -52,3 +52,15 @@ resource "kubernetes_secret" "kubeip_secret" {
     EOT
   }
 }
+
+resource "kubernetes_secret" "database_secret" {
+  depends_on = [google_container_cluster.cluster]
+
+  metadata {
+    name = "database"
+  }
+
+  data = {
+    uri = var.database_uri
+  }
+}
