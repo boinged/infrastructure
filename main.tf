@@ -33,7 +33,7 @@ resource "google_container_node_pool" "main_pool" {
 
   management {
     auto_repair  = true
-    auto_upgrade = false
+    auto_upgrade = true
   }
 
   node_config {
@@ -57,7 +57,7 @@ resource "google_container_node_pool" "ingress_pool" {
 
   management {
     auto_repair  = true
-    auto_upgrade = false
+    auto_upgrade = true
   }
 
   node_config {
