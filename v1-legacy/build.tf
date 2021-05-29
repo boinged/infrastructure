@@ -14,6 +14,27 @@ resource "google_cloudbuild_trigger" "api_ci_trigger" {
   filename = "cloudbuild.yaml"
 }
 
+resource "google_cloudbuild_trigger" "api_cd_trigger" {
+  provider = google-beta
+  name     = "api-cd"
+
+  github {
+    owner = "boinged"
+    name  = "api-env"
+
+    push {
+      branch = "master"
+    }
+  }
+
+  substitutions = {
+    _CLUSTER  = var.cluster
+    _LOCATION = var.location
+  }
+
+  filename = "cloudbuild.yaml"
+}
+
 resource "google_cloudbuild_trigger" "web_cd_trigger" {
   provider = google-beta
   name     = "web-cd"
@@ -28,7 +49,7 @@ resource "google_cloudbuild_trigger" "web_cd_trigger" {
   }
 
   substitutions = {
-    _SERVICE_IP = "127.0.0.1"
+    _SERVICE_IP = google_compute_address.ip_address.address
   }
 
   filename = "cloudbuild.yaml"

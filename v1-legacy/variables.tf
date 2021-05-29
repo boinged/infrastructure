@@ -1,3 +1,7 @@
+variable "cluster" {
+  type = string
+}
+
 variable "database_uri" {
   type = string
 }
