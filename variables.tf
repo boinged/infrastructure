@@ -17,3 +17,7 @@ variable "project" {
 variable "region" {
   type = string
 }
+
+variable "services" {
+  type = list(string)
+}
