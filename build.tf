@@ -1,6 +1,5 @@
 resource "google_cloudbuild_trigger" "api_ci_trigger" {
-  provider = google-beta
-  name     = "api-ci"
+  name = "api-ci"
 
   github {
     owner = "boinged"
@@ -15,7 +14,6 @@ resource "google_cloudbuild_trigger" "api_ci_trigger" {
 }
 
 resource "google_cloudbuild_trigger" "web_cd_trigger" {
-  provider = google-beta
   name     = "web-cd"
 
   github {
