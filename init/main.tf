@@ -1,9 +1,9 @@
 data "google_client_config" "current" {
 }
 
-resource "google_storage_bucket" "state_bucket" {
+resource "google_storage_bucket" "bucket" {
   name     = "${data.google_client_config.current.project}-tfstate"
-  location = "EUROPE-WEST2"
+  location = var.region
 
   uniform_bucket_level_access = true
 
@@ -21,3 +21,11 @@ resource "google_storage_bucket" "state_bucket" {
     }
   }
 }
+
+#resource "google_storage_bucket_acl" "bucket_acl" {
+#  bucket = "${google_storage_bucket.bucket.name}"
+#
+#  role_entity = [
+#    "OWNER:${var.user}"
+#  ]
+#}
