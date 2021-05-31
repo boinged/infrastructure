@@ -14,7 +14,7 @@ resource "google_cloudbuild_trigger" "api_ci_trigger" {
 }
 
 resource "google_cloudbuild_trigger" "web_cd_trigger" {
-  name     = "web-cd"
+  name = "web-cd"
 
   github {
     owner = "boinged"

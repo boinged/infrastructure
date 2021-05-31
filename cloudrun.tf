@@ -1,6 +1,6 @@
-resource "google_cloud_run_service" "cloud_run_service" {
+resource "google_cloud_run_service" "run_service" {
   name     = "api"
-  location = "europe-west2"
+  location = var.region
 
   template {
     spec {
@@ -14,4 +14,11 @@ resource "google_cloud_run_service" "cloud_run_service" {
       }
     }
   }
+}
+
+resource "google_cloud_run_service_iam_member" "cloud_run_iam" {
+  service  = google_cloud_run_service.run_service.name
+  location = google_cloud_run_service.run_service.location
+  role     = "roles/run.invoker"
+  member   = "allUsers"
 }
