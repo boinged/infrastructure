@@ -6,7 +6,7 @@ resource "google_cloudbuild_trigger" "api_ci_trigger" {
     name  = "api-app"
 
     push {
-      branch = "master"
+      branch = "main"
     }
   }
 
@@ -21,7 +21,7 @@ resource "google_cloudbuild_trigger" "web_cd_trigger" {
     name  = "web-app"
 
     push {
-      branch = "master"
+      branch = "main"
     }
   }
 
