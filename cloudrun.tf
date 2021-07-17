@@ -5,7 +5,7 @@ resource "google_cloud_run_service" "run_service" {
   template {
     spec {
       containers {
-        image = "eu.gcr.io/stevenshipton-com/api:3ea9fe2"
+        image = "eu.gcr.io/stevenshipton-com/api:69906bc"
 
         env {
           name  = "DATABASE_URI"
